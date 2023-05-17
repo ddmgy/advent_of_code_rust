@@ -1,0 +1,7 @@
+[workspace]
+members = [
+  "aoc",
+  "aoc_common",
+  "aoc_derive",
+  "aoc_run",
+]

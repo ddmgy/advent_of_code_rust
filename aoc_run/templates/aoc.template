@@ -1,0 +1,25 @@
+{% let day_long = "{:02}"|format(day) %}
+#[crate::aoc(year = {{+ year }}, day = {{+ day }}, part = "A")]
+fn day{{ day_long }}a(chars: &[u8]) -> Option<i64> {
+    unimplemented!();
+}
+
+#[crate::aoc(year = {{+ year }}, day = {{+ day }}, part = "B")]
+fn day{{ day_long }}b(chars: &[u8]) -> Option<usize> {
+    unimplemented!();
+}
+
+#[cfg(test)]
+mod tests_y{{ year }}_day{{ day_long }} {
+    use super::*;
+
+    #[test]
+    #[allow(non_snake_case)]
+    fn partA() {
+    }
+
+    #[test]
+    #[allow(non_snake_case)]
+    fn partB() {
+    }
+}

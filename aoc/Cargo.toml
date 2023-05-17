@@ -1,0 +1,22 @@
+[package]
+name = "aoc"
+version = "0.1.0"
+edition = "2021"
+build = "build.rs"
+
+[build-dependencies]
+aoc_common = { path = "../aoc_common" }
+eyre = "^0.6.0"
+glob = "^0.3.0"
+prettyplease = "^0.1.0"
+quote = "^1.0.0"
+regex = "^1.7.0"
+syn = { version =  "^1.0.0", features = ["full"] }
+
+[dependencies]
+aoc_common = { path = "../aoc_common" }
+aoc_derive = { path = "../aoc_derive" }
+eyre = "^0.6.0"
+lazy_static = "^1.4.0"
+nom = "^7.1.0"
+thiserror = "^1.0.0"

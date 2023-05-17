@@ -1,0 +1,8 @@
+/target
+/Cargo.lock
+
+# Do not commit any aoc inputs
+/data
+
+# Do not commit auto-generated files
+aoc/src/register.rs
