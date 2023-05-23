@@ -9,14 +9,12 @@ use nom::{
 #[derive(Debug)]
 enum Error {
     InstructionKindParse,
-    RangeParse,
 }
 
 impl std::fmt::Display for Error {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match *self {
             Self::InstructionKindParse => write!(f, "unable to parse instruction kind"),
-            Self::RangeParse => write!(f, "unable to parse range"),
         }
     }
 }
@@ -70,24 +68,21 @@ fn range(input: &str) -> IResult<&str, (usize, usize)> {
 }
 
 impl Instruction {
-    fn new(input: &str) -> IResult<&str, Self> {
+    fn new(input: &str) -> Result<Self, ()> {
         match tuple((instruction_kind, range, tag(" through "), range))(input) {
             Ok((input, (kind, r1, _, r2))) => {
                 let (x1, y1) = r1;
                 let (x2, y2) = r2;
 
-                Ok((
-                    input,
-                    Self {
-                        kind,
-                        x1,
-                        y1,
-                        x2,
-                        y2,
-                    }
-                ))
+                Ok(Self {
+                    kind,
+                    x1,
+                    y1,
+                    x2,
+                    y2,
+                })
             },
-            Err(e) => Err(e),
+            Err(e) => Err(()),
         }
     }
 }
@@ -179,12 +174,11 @@ where
     G: Grid,
 {
     let mut grid = make_grid();
-    for &line in lines.iter() {
-        match Instruction::new(line) {
-            Ok((_, instruction)) => {
-                grid.interpret(instruction);
-            },
-            Err(e) => eprintln!("{e}"),
+    for (i, &line) in lines.iter().enumerate() {
+        if let Ok(instruction) = Instruction::new(line) {
+            grid.interpret(instruction);
+        } else {
+            eprintln!("error on line {i}");
         }
     }
 
