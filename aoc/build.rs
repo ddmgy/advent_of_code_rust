@@ -81,6 +81,8 @@ fn main() -> eyre::Result<()> {
     }
 
     let current_dir = std::env::current_dir().unwrap();
+    // TODO: Rewrite the way that years is written to file, so it can be sorted.
+    // Use common function to write collection of syn::Stmt to file?
     let mut years = Vec::new();
     for (year, days) in modules.into_iter() {
         let year_dir_name = format!(
@@ -93,12 +95,16 @@ fn main() -> eyre::Result<()> {
             fs::create_dir_all(year_dir)?;
         }
 
+        let mut days = days
+            .into_iter()
+            .collect::<Vec<_>>();
+        days.sort_by_cached_key(|i| i.to_string());
         let days: Vec<syn::Stmt> = days
             .into_iter()
             .map(|day| parse_quote! {
                 pub(crate) mod #day;
-                })
-                .collect();
+            })
+            .collect();
 
         let year_mod = year_dir.join("mod.rs");
         let days: syn::File = parse_quote! {
