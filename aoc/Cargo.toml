@@ -4,6 +4,9 @@ version = "0.1.0"
 edition = "2021"
 build = "build.rs"
 
+[features]
+parallel = []
+
 [build-dependencies]
 aoc_common = { path = "../aoc_common" }
 eyre = "^0.6.0"
@@ -19,4 +22,5 @@ aoc_derive = { path = "../aoc_derive" }
 eyre = "^0.6.0"
 lazy_static = "^1.4.0"
 nom = "^7.1.0"
+rayon = "^1.7.0"
 thiserror = "^1.0.0"

@@ -1,5 +1,8 @@
 use std::fmt;
 
+#[cfg(feature = "parallel")]
+use rayon::prelude::*;
+
 #[derive(Clone, Debug, Eq, PartialEq)]
 enum FailureReason<'a> {
     Rule1(usize),
@@ -115,11 +118,22 @@ fn naughty_or_nice_v2(password: &str) -> Result<(), FailureReason> {
     ])
 }
 
+#[cfg(not(feature = "parallel"))]
 fn day05<F>(passwords: &[&str], f: F) -> usize
 where F: Fn(&str) -> Result<(), FailureReason>
 {
     passwords
         .iter()
+        .filter(|password| f(password).is_ok())
+        .count()
+}
+
+#[cfg(feature = "parallel")]
+fn day05<F>(passwords: &[&str], f: F) -> usize
+where F: Fn(&str) -> Result<(), FailureReason> + Sync
+{
+    passwords
+        .par_iter()
         .filter(|password| f(password).is_ok())
         .count()
 }

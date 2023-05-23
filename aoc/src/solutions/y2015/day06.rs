@@ -70,7 +70,7 @@ fn range(input: &str) -> IResult<&str, (usize, usize)> {
 impl Instruction {
     fn new(input: &str) -> Result<Self, ()> {
         match tuple((instruction_kind, range, tag(" through "), range))(input) {
-            Ok((input, (kind, r1, _, r2))) => {
+            Ok((_, (kind, r1, _, r2))) => {
                 let (x1, y1) = r1;
                 let (x2, y2) = r2;
 
@@ -82,7 +82,7 @@ impl Instruction {
                     y2,
                 })
             },
-            Err(e) => Err(()),
+            Err(_) => Err(()),
         }
     }
 }
