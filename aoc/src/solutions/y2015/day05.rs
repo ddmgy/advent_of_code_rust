@@ -118,12 +118,10 @@ fn naughty_or_nice_v2(password: &str) -> Result<(), FailureReason> {
 fn day05<F>(passwords: &[&str], f: F) -> usize
 where F: Fn(&str) -> Result<(), FailureReason>
 {
-    let nice = passwords
+    passwords
         .iter()
         .filter(|password| f(password).is_ok())
-        .collect::<Vec<_>>();
-
-    nice.len()
+        .count()
 }
 
 #[crate::aoc(year = 2015, day = 5, part = "A")]
