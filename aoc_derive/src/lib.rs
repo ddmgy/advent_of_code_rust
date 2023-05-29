@@ -123,6 +123,8 @@ pub fn aoc(attr: TokenStream, input: TokenStream) -> TokenStream {
         None => quote!(None),
     };
 
+    // TODO: Reevaluate which of these I need to keep
+    // I can probably get rid of the &mut inputs
     let inputs = match func.sig.inputs.first() {
         Some(FnArg::Typed(PatType { ty, .. })) if quote!(#ty).to_string().contains("Vec < & [u8] >") => {
             quote!((crate::input::parse_input_bytes(&crate::input::input_bytes(#year, #day)?, #sep.map(|c: char| c as u8))?))

@@ -42,6 +42,7 @@ fn main() -> eyre::Result<()> {
             let CreateArgs {
                 year,
                 day,
+                input_type,
                 show_version,
             } = *args;
 
@@ -86,7 +87,10 @@ fn main() -> eyre::Result<()> {
             ));
 
             if !solution_file.exists() {
-                let temp = AocTemplate::new(year, day);
+                let (input_name, input_type) =
+                    (input_type.name_as_string(), input_type.type_as_string());
+
+                let temp = AocTemplate::new(year, day, input_name, input_type);
                 fs::write(solution_file, temp.render()?)?;
             }
 

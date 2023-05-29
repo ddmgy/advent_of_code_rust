@@ -1,6 +1,6 @@
 use std::ops::RangeInclusive;
 
-use clap::{Args, Parser, Subcommand};
+use clap::{Args, Parser, Subcommand, ValueEnum};
 
 #[derive(Parser)]
 #[command(name = "aoc", author, about, long_about = None)]
@@ -28,8 +28,48 @@ pub(crate) struct CreateArgs {
     /// Number in range [1, 25]
     pub(crate) day: usize,
 
+    #[arg(short = 't', value_enum, default_value_t = InputType::StrSlice)]
+    pub(crate) input_type: InputType,
+
     #[arg(short = 'V')]
     pub(crate) show_version: bool,
+}
+
+#[derive(Clone, Copy, Eq, Ord, PartialEq, PartialOrd, ValueEnum)]
+pub(crate) enum InputType {
+    /// set input type as `&str`
+    StrSlice,
+    /// set input type as `&[&str]`
+    SliceOfStrSlice,
+    /// set input type as `Vec<&str>`
+    VecOfStrSlice,
+    /// set input type as `&[u8]`
+    U8Slice,
+    /// set input type as `&[&[u8]]`
+    SliceOfU8Slice,
+    /// set input type as `Vec<&[u8]>`
+    VecOfU8Slice,
+}
+
+impl InputType {
+    pub(crate) fn name_as_string(&self) -> &str {
+        match *self {
+            Self::StrSlice => "input",
+            Self::U8Slice => "chars",
+            _ => "lines",
+        }
+    }
+
+    pub(crate) fn type_as_string(&self) -> &str {
+        match *self {
+            Self::StrSlice => "&str",
+            Self::SliceOfStrSlice => "&[&str]",
+            Self::VecOfStrSlice => "Vec<&str>",
+            Self::U8Slice => "&[u8]",
+            Self::SliceOfU8Slice => "&[&[u8]]",
+            Self::VecOfU8Slice => "Vec<&[u8]>",
+        }
+    }
 }
 
 #[derive(Args)]
