@@ -106,7 +106,7 @@ fn day02b(lines: Vec<&str>) -> Option<u64> {
 }
 
 #[cfg(test)]
-mod tests_y2015_day02{
+mod tests_y2015_day02 {
     use super::*;
 
     #[test]

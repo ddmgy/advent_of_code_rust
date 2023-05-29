@@ -196,7 +196,7 @@ fn day06b(lines: &[&str]) -> usize {
 }
 
 #[cfg(test)]
-mod tests_y2015_day06{
+mod tests_y2015_day06 {
     use super::*;
 
     #[test]

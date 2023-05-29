@@ -149,7 +149,7 @@ fn day05b(passwords: &[&str]) -> usize {
 }
 
 #[cfg(test)]
-mod tests_y2015_day05{
+mod tests_y2015_day05 {
     use super::*;
 
     #[test]

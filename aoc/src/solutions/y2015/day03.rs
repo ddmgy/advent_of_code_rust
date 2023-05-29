@@ -93,7 +93,7 @@ fn day03b(input: &str) -> usize {
 }
 
 #[cfg(test)]
-mod tests_y2015_day03{
+mod tests_y2015_day03 {
     use super::*;
 
     #[test]

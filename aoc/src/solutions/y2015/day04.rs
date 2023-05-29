@@ -52,7 +52,7 @@ fn day04b(input: &str) -> u64 {
 }
 
 #[cfg(test)]
-mod tests_y2015_day04{
+mod tests_y2015_day04 {
     use super::*;
 
     #[test]
