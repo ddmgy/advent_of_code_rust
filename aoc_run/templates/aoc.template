@@ -1,6 +1,6 @@
 {% let day_long = "{:02}"|format(day) %}
 #[crate::aoc(year = {{~ year }}, day = {{~ day }}, part = "A")]
-fn day{{ day_long }}a({{ input_name }}: {{~ input_type }}) -> Option<i64> {
+fn day{{ day_long }}a({{ input_name }}: {{~ input_type }}) -> Option<usize> {
     unimplemented!();
 }
 
