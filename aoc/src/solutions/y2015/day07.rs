@@ -276,8 +276,6 @@ fn day07b(lines: &[&str]) -> Option<u16> {
 
 #[cfg(test)]
 mod tests_y2015_day07 {
-    use super::*;
-
     #[test]
     #[allow(non_snake_case)]
     fn partA() {
