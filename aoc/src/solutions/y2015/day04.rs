@@ -41,14 +41,12 @@ fn day04(input: &str, num_leading_zeroes: usize) -> u64 {
 
 #[crate::aoc(year = 2015, day = 4, part = "A")]
 fn day04a(input: &str) -> u64 {
-    let input = input.trim_end_matches(|c| c == '\r' || c == '\n');
-    day04(input, 5)
+    day04(input.trim_end(), 5)
 }
 
 #[crate::aoc(year = 2015, day = 4, part = "B")]
 fn day04b(input: &str) -> u64 {
-    let input = input.trim_end_matches(|c| c == '\r' || c == '\n');
-    day04(input, 6)
+    day04(input.trim_end(), 6)
 }
 
 #[cfg(test)]
