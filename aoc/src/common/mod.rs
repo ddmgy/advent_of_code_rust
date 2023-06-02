@@ -1,5 +1,11 @@
+mod json;
 mod md5;
 mod permutation;
+
+pub use json::{
+    Json,
+    error::Error,
+};
 
 pub use md5::{
     Digest,
