@@ -19,26 +19,32 @@ impl Iterator for PermutationIndices {
     type Item = Vec<usize>;
 
     fn next(&mut self) -> Option<Self::Item> {
-        if self.i > 0 {
+        let Self {
+            ref mut indices,
+            ref mut swaps,
+            ref mut i,
+        } = self;
+
+        if *i > 0 {
             loop {
-                if self.i >= self.swaps.len() {
+                if *i >= swaps.len() {
                     return None;
                 }
 
-                if self.swaps[self.i] < self.i {
+                if swaps[*i] < *i {
                     break;
                 }
 
-                self.swaps[self.i] = 0;
-                self.i += 1;
+                swaps[*i] = 0;
+                *i += 1;
             }
 
-            self.indices.swap(self.i, (self.i & 1) * self.swaps[self.i]);
-            self.swaps[self.i] += 1;
+            indices.swap(*i, (*i & 1) * swaps[*i]);
+            swaps[*i] += 1;
         }
 
-        self.i = 1;
-        Some(self.indices.clone())
+        *i = 1;
+        Some(indices.clone())
     }
 }
 
@@ -112,12 +118,18 @@ where T: Clone + PartialOrd
         if self.first {
             self.first = false;
         } else {
-            if self.size < 2 {
+            let Self {
+                ref mut data,
+                ref size,
+                ..
+            } = self;
+
+            if *size < 2 {
                 return None;
             }
 
-            let mut i = self.size - 1;
-            while i > 0 && self.data[i - 1] >= self.data[i] {
+            let mut i = size - 1;
+            while i > 0 && data[i - 1] >= data[i] {
                 i -= 1;
             }
 
@@ -125,13 +137,13 @@ where T: Clone + PartialOrd
                 return None;
             }
 
-            let mut j = self.size - 1;
-            while j >= i && self.data[j] <= self.data[i - 1] {
+            let mut j = size - 1;
+            while j >= i && data[j] <= data[i - 1] {
                 j -= 1;
             }
 
-            self.data.swap(j, i - 1);
-            let _ = &self.data[i..].reverse();
+            data.swap(j, i - 1);
+            let _ = &data[i..].reverse();
         }
 
         Some(self.data.clone())
@@ -171,7 +183,7 @@ lex_perms_ext_impl!(Vec<T>, &[T], [T]);
 #[cfg(test)]
 mod tests {
     #[test]
-    fn test_permutation_indices() {
+    fn permutation_indices() {
         let mut perms = super::PermutationIndices::new(3);
         assert_eq!(perms.next(), Some(vec![0, 1, 2]));
         assert_eq!(perms.next(), Some(vec![1, 0, 2]));
@@ -183,7 +195,7 @@ mod tests {
     }
 
     #[test]
-    fn test_permutations() {
+    fn permutations() {
         use super::PermutationsExt as _;
 
         let data = &['a', 'b', 'c', 'd'][..];
@@ -216,7 +228,7 @@ mod tests {
     }
 
     #[test]
-    fn test_lexicographic_permutations() {
+    fn lexicographic_permutations() {
         use super::LexicographicPermutationsExt as _;
 
         let data = &[1, 2, 3][..];
