@@ -136,7 +136,7 @@ fn run(year: usize, day: usize, part: aoc_common::Part, version: Option<String>)
             let elapsed = format!(" ({})", pretty_duration(after - before));
             let header = format!(
                 r#"Solution for {year}/{day:02} part {part}{}:"#,
-                version.clone().map(|v| format!(r#" (version "{v}""#)).unwrap_or_default(),
+                version.clone().map(|v| format!(r#" (version "{v}")"#)).unwrap_or_default(),
             );
             let sep = format!("\n{}", " ".repeat(header.len()));
 
