@@ -25,7 +25,6 @@ impl From<std::num::ParseIntError> for Error {
 
 #[derive(Debug)]
 struct Ingredient {
-    name: String,
     capacity: i64,
     durability: i64,
     flavor: i64,
@@ -45,7 +44,6 @@ impl std::str::FromStr for Ingredient {
         if parts.len() != 11 {
             Err(Error::Input(s.into()))
         } else {
-            let name = parts[0].into();
             let capacity = parts[2].parse()?;
             let durability = parts[4].parse()?;
             let flavor = parts[6].parse()?;
@@ -53,7 +51,6 @@ impl std::str::FromStr for Ingredient {
             let calories = parts[10].parse()?;
 
             Ok(Ingredient {
-                name,
                 capacity,
                 durability,
                 flavor,
