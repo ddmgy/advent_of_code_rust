@@ -57,7 +57,7 @@ struct Item {
     armor: u32,
 }
 
-const WEAPONS: &[Item] = &[
+const WEAPONS: [Item; 5] = [
     Item { cost: 8, damage: 4, armor: 0 }, // Dagger
     Item { cost: 10, damage: 5, armor: 0 }, // Shortsword
     Item { cost: 25, damage: 6, armor: 0 }, // Warhammer
@@ -65,7 +65,7 @@ const WEAPONS: &[Item] = &[
     Item { cost: 74, damage: 8, armor: 0 }, // Greataxe
 ];
 
-const ARMORS: &[Item] = &[
+const ARMORS: [Item; 6] = [
     Item { cost: 0, damage: 0, armor: 0 }, // No Armor
     Item { cost: 13, damage: 0, armor: 1 }, // Leather
     Item { cost: 31, damage: 0, armor: 2 }, // Chainmail
@@ -74,7 +74,7 @@ const ARMORS: &[Item] = &[
     Item { cost: 102, damage: 0, armor: 5 }, // Platemail
 ];
 
-const RINGS: &[Item] = &[
+const RINGS: [Item; 8] = [
     Item { cost: 0, damage: 0, armor: 0 }, // No Ring 1
     Item { cost: 0, damage: 0, armor: 0 }, // No Ring 2
     Item { cost: 25, damage: 1, armor: 0 }, // Damage +1
@@ -165,10 +165,5 @@ mod tests_y2015_day21 {
         assert!(does_player_win(&player, &boss));
 
         Ok(())
-    }
-
-    #[test]
-    #[allow(non_snake_case)]
-    fn partB() {
     }
 }
