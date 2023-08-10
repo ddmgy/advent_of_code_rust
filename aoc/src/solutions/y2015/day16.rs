@@ -210,14 +210,3 @@ fn day16a(lines: &[&str]) -> Option<usize> {
 fn day16b(lines: &[&str]) -> Option<usize> {
     day16(lines, mfcsam_v2)
 }
-
-#[cfg(test)]
-mod tests_y2015_day16 {
-    use super::*;
-
-    #[test]
-    #[allow(non_snake_case)]
-    fn partA() {
-        day16a(&[""]);
-    }
-}
