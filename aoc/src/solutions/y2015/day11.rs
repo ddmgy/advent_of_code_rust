@@ -125,9 +125,4 @@ mod tests_y2015_day11 {
         let mut gen = PasswordGenerator::new(b"ghijklmn");
         assert_eq!(gen.next(), Some(String::from("ghjaabcc")));
     }
-
-    #[test]
-    #[allow(non_snake_case)]
-    fn partB() {
-    }
 }

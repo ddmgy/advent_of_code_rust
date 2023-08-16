@@ -59,9 +59,4 @@ mod tests_y2015_day04 {
         assert_eq!(day04a("abcdef"), 609043);
         assert_eq!(day04a("pqrstuv"), 1048970);
     }
-
-    #[test]
-    #[allow(non_snake_case)]
-    fn partB() {
-    }
 }

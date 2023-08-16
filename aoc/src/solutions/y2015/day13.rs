@@ -102,9 +102,4 @@ mod tests_y2015_day13 {
     fn partA() {
         assert_eq!(day13a(SEATING_ARRANGEMENT), 330);
     }
-
-    #[test]
-    #[allow(non_snake_case)]
-    fn partB() {
-    }
 }
